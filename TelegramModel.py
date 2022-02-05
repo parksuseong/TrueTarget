@@ -1,6 +1,7 @@
 from datetime import datetime
 import time
 import telegram
+#텔래그램 클래스
 
 class TelegramModel():
     
