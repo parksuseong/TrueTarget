@@ -1,21 +1,20 @@
-import ccxt
-from datetime import datetime, timedelta
-import pandas as pd
-import TelegramModel
+#import TelegramModel
+import DataModel
+import matplotlib as mpl
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-exchange = ccxt.binance()
-periods = '1d'
-market = 'BTC/USDT'
-
-ohlcvs = exchange.fetch_ohlcv(market, periods)
-#일자, 시가, 고가, 저가, 종가, 거래량
-df = pd.DataFrame(ohlcvs, columns=['datetime', 'open', 'high', 'low', 'close', 'volume'])
-df['datetime'] = pd.to_datetime(df['datetime'], unit='ms')
-df['datetime'] = pd.DatetimeIndex(df['datetime']) + timedelta(hours=9)
-df.set_index('datetime', inplace=True)
-df.reset_index(inplace=True)
+model = DataModel.DataModel('BTC/USDT','1d')
+df = model.get_data()
+print(df)
 
 
-telegram_bot = TelegramModel.TelegramModel()
-telegram_bot.send_message("안녕")
+#df[["close"]].plot()
+#plt.show()
+
+
+
+
+
+
